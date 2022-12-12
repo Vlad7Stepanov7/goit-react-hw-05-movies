@@ -1,7 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useParams, Link, useLocation, Outlet } from "react-router-dom";
 import { getDetailsMovieById } from "utils/API";
 import { Description, Title, ButtonBack, ListNavItem, NavItem, Poster } from "./MovieDetails.styled";
+
 
 const MovieDetails = () => {
     const {movieId} = useParams();
@@ -56,8 +57,10 @@ const MovieDetails = () => {
              <ul>
                <li><Link to="cast" state={{from: location.state.from}}>Cast</Link></li>
                <li><Link to="reviews" state={{from: location.state.from}}>Reviews</Link></li>
-             </ul>
-            <Outlet/>
+    </ul>
+        <Suspense fallback={<div>Loading page...</div>}>
+         <Outlet />
+        </Suspense>
            </div>
     }
     

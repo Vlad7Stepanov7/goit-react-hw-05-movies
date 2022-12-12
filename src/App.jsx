@@ -1,14 +1,15 @@
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
-import Home from "components/Home/Home";
-import Movies from "components/Movies";
-import MovieDetails from "components/MovieDetails";
-import Cast from "components/Cast";
-import Reviews from "components/Reviews";
 
+const Home = lazy(() => import("components/Home"));
+const Movies = lazy(() => import("components/Movies"));
+const MovieDetails = lazy(() => import("components/MovieDetails"));
+const Cast = lazy(() => import("components/Cast"));
+const Reviews = lazy(() => import("components/Reviews"))
 
 export const App = () => {
   return (
-    <div>
+    <Suspense>
       <Routes>
         <Route path="/" element={<Home />} />
          <Route path="/movies" element={<Movies />} />
@@ -18,6 +19,6 @@ export const App = () => {
           </Route>
         <Route path="*" element={"Address is not find"} />
       </Routes>
-    </div>
+      </Suspense>
   );
 };
